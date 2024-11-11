@@ -2,6 +2,8 @@
 
 class PatientsController < ApplicationController
   before_action :set_patient, only: %i[show edit update destroy]
+  load_and_authorize_resource
+
 
   def index
     @patients = Patient.all
@@ -42,7 +44,6 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to patients_path, status: :see_other, notice: 'Patient was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -54,7 +55,7 @@ class PatientsController < ApplicationController
 
   def patient_params
     params.require(:patient).permit(
-      :avatar_url, :first_name, :last_name, :bio, :birdth_day, :sex, :marital_status,
+      :avatar_url, :first_name, :last_name, :bio, :phone, :birdth_day, :sex, :marital_status,
       { address: %i[street city state country] },
       :status, :user_id
     )
