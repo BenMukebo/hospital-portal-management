@@ -11,8 +11,12 @@ gem 'rubocop', '~> 1.68'
 
 gem 'bullet', group: 'development'
 gem 'cancancan'
+
 gem 'devise', '~> 4.9'
 gem 'letter_opener', group: :development
+
+gem 'chartkick'
+gem 'groupdate'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
