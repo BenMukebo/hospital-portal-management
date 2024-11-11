@@ -6,5 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable, :trackable,
          :recoverable, :rememberable, :validatable
 
-  enum role: { patient: 0, receptionist: 1, doctor: 2, admin: 3 }, _prefix: false, _default: :patient, _suffix: true
+  has_one :patient
+
+  enum role: { patient: 0, receptionist: 1, doctor: 2, admin: 3 }.freeze, _prefix: false, _default: :patient
 end
