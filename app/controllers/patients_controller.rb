@@ -13,6 +13,8 @@ class PatientsController < ApplicationController
     @patient = Patient.new
   end
 
+  def edit; end
+
   def create
     @patient = Patient.new(patient_params)
 
@@ -20,7 +22,7 @@ class PatientsController < ApplicationController
       if @patient.save
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
       else
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -51,7 +53,10 @@ class PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:avatar_url, :first_name, :last_name, :bio, :birdth_day, :sex, :marital_status,
-                                    { address: %i[street city state country] }, :status, :user_id)
+    params.require(:patient).permit(
+      :avatar_url, :first_name, :last_name, :bio, :birdth_day, :sex, :marital_status,
+      { address: %i[street city state country] },
+      :status, :user_id
+    )
   end
 end
