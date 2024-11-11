@@ -18,9 +18,11 @@
         <nav>
           <% if user_signed_in? %>
             <%#<%= link_to "Dashboard", dashboard_path, class: "text-gray-700 hover:text-indigo-600 px-3" %>
-            <%#<%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "text-gray-700 hover:text-indigo-600 px-3" %>
-            <span class="mr-4 text-gray-700">Welcome, <%= current_user.email %></span>
-            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg" %>
+            <div class="flex items-center">
+              <span class="mr-4 text-gray-700">Welcome, <%= current_user.email %></span>
+              <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: "text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg") %>
+              <%#<%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "text-gray-700 hover:text-indigo-600 px-3" %>
+            </div>
           <% else %>
             <%= link_to "Log In", new_user_session_path, class: "text-gray-700 hover:text-indigo-600 px-3" %>
             <%= link_to "Sign Up", new_user_registration_path, class: "ml-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700" %>

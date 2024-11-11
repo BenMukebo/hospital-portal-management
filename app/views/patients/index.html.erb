@@ -13,14 +13,19 @@
   </div>
 
   <!-- Patients List -->
-  <div id="patients" class="space-y-4">
-    <% @patients.each do |patient| %>
-      <div class="p-4 bg-gray-50 rounded-lg shadow-sm">
-        <%= render patient %>
-        <p class="my-3">
-          <%= link_to "View details", patient, class: "py-2 px-4 bg-blue-200 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors" %>
-        </p>
-      </div>
-    <% end %>
-  </div>
+
+  <% if @patients.empty? %>
+    <p class="text-gray-700 tex-[32px] font-bold">No patients found.</p>
+  <% else %>
+    <div id="patients" class="space-y-4">
+      <% @patients.each do |patient| %>
+        <div class="p-4 bg-gray-50 rounded-lg shadow-sm">
+          <%= render patient %>
+          <p class="my-3">
+            <%= link_to "View details", patient, class: "py-2 px-4 bg-blue-200 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition-colors" %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
