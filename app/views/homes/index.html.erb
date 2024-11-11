@@ -1,36 +1,44 @@
 <!-- app/views/homes/index.html.erb -->
 <div class="min-h-screen bg-gray-100 text-gray-800">
-<%
-=begin 
-%>
-  <!-- Navbar -->
-  <nav class="bg-white shadow">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <!-- Logo -->
-      <a href="/" class="text-2xl font-bold text-indigo-600">Hospital Portal</a>
-
-      <!-- Navbar Links -->
-      <div>
-        <% if user_signed_in? %>
-          <!-- Show if logged in -->
-          <span class="mr-4 text-gray-700">Welcome, <%= current_user.email %></span>
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-lg" %>
-        <% else %>
-          <!-- Show if not logged in -->
-          <%= link_to 'Login', new_user_session_path, class: "text-indigo-600 hover:text-indigo-800 mr-4" %>
-          <%= link_to 'Signup', new_user_registration_path, class: "text-white bg-indigo-600 hover:bg-indigo-700 py-2 px-4 rounded-lg" %>
-        <% end %>
-      </div>
-    </div>
-  </nav>
-<%
-=end
-%>
 
   <!-- Main Content -->
   <div class="container mx-auto px-4 py-20 text-center">
-    <h1 class="font-bold text-5xl text-gray-800 mb-6">Welcome to the Hospital Portal</h1>
-    <p class="text-lg text-gray-600 mb-4">Effortlessly manage patient registrations and view patient data.</p>
-    <p class="text-sm text-gray-500">Find me in <code>app/views/homes/index.html.erb</code></p>
+    <h1 class="font-bold text-5xl text-gray-800 mb-6">Welcome to the Hospital Portal Management System</h1>
+    <p class="text-lg text-gray-600 mb-6">
+      Your centralized platform for managing hospital operations. From patient registrations to detailed analytics, we streamline essential tasks for medical staff and provide secure, efficient access to patient information.
+    </p>
+
+    <!-- Descriptive Section for App Roles -->
+    <div class="text-left max-w-2xl mx-auto mt-10 mb-8">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-4">App Features</h2>
+
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">Receptionist Portal</h3>
+      <p class="text-gray-600 mb-4">
+        Designed for receptionists to efficiently register new patients and manage patient information. The portal allows quick access to create, read, update, and delete patient records, ensuring smooth patient intake and data accuracy.
+      </p>
+
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">Doctor Portal</h3>
+      <p class="text-gray-600 mb-4">
+        Doctors have access to a comprehensive view of registered patients and can view analytics on patient registrations over time. This includes interactive graphs displaying patient registration trends, enabling data-driven insights for better healthcare management.
+      </p>
+
+      <h3 class="text-xl font-semibold text-gray-700 mb-2">Unified Login</h3>
+      <p class="text-gray-600">
+        A single sign-in system for both receptionists and doctors, allowing easy access based on user roles. Authentication is securely managed to protect sensitive data and provide role-specific access.
+      </p>
+    </div>
+
+    <!-- Call-to-Action Links Based on User Role -->
+    <% if user_signed_in? %>
+      <div class="mt-10">
+        <% if current_user.receptionist? %>
+          <%= link_to "Manage Patients", patients_path, class: "text-white bg-indigo-600 hover:bg-indigo-700 py-3 px-6 rounded-lg text-lg font-semibold" %>
+        <% elsif current_user.doctor? %>
+          <%= link_to "View Patient Statistics", doctors_patient_statistics_path, class: "text-white bg-indigo-600 hover:bg-indigo-700 py-3 px-6 rounded-lg text-lg font-semibold" %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="mt-8 text-gray-500">Please <%= link_to 'log in', new_user_session_path, class: "text-indigo-600 hover:underline" %> or <%= link_to 'sign up', new_user_registration_path, class: "text-indigo-600 hover:underline" %> to access your dashboard.</p>
+    <% end %>
   </div>
 </div>

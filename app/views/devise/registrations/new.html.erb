@@ -28,6 +28,14 @@
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
       </div>
 
+      <!--  Agreed_to_terms Field -->
+      <div>
+        <%= f.label :terms_of_service, class: "flex items-center" do %>
+          <%= f.check_box :terms_of_service, class: "form-checkbox h-4 w-4 text-indigo-600 border border-gray-300 rounded focus:ring-indigo-500" %>
+          <span class="ml-2 text-gray-700">I agree to the <%= link_to("Terms of Service", class: "text-indigo-600") %></span>
+          <% end %>
+      </div>
+
       <!-- Submit Button -->
       <div>
         <%= f.submit "Sign up", class: "w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
