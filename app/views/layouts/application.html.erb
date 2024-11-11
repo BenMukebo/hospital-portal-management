@@ -1,20 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>HospitalPortalManagement</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+  <body class="bg-gray-50 text-gray-900">
+    <!-- Navbar -->
+    <header class="bg-white shadow-md py-4 fixed w-full top-0 z-10">
+      <div class="container mx-auto px-5 flex justify-between items-center">
+        <a href="/" class="text-2xl font-bold text-indigo-600">HospitalPortalManagement</a>
+        <nav>
+          <% if user_signed_in? %>
+            <%#<%= link_to "Dashboard", dashboard_path, class: "text-gray-700 hover:text-indigo-600 px-3" %>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-gray-700 hover:text-indigo-600 px-3" %>
+          <% else %>
+            <%= link_to "Log In", new_user_session_path, class: "text-gray-700 hover:text-indigo-600 px-3" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "ml-4 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700" %>
+          <% end %>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto mt-28 px-5">
+      <!-- Flash Messages -->
+      <% if notice %>
+        <p class="mb-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded-lg"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="mb-4 p-4 bg-red-100 border border-red-200 text-red-700 rounded-lg"><%= alert %></p>
+      <% end %>
+
+      <!-- Yielded Content -->
       <%= yield %>
     </main>
   </body>
