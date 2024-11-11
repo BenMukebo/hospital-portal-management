@@ -18,4 +18,16 @@ class User < ApplicationRecord
   validates_inclusion_of :remember_me, in: [true, false], allow_blank: true
 
   enum role: { patient: 0, receptionist: 1, doctor: 2, admin: 3 }.freeze, _prefix: false, _default: :patient
+
+  def receptionist?
+    role == 'receptionist'
+  end
+
+  def doctor?
+    role == 'doctor'
+  end
+
+  def admin?
+    role == 'admin'
+  end
 end
