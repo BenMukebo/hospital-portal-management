@@ -7,7 +7,6 @@ class PatientsController < ApplicationController
 
   def index
     @patients = Patient.accessible_by(current_ability)
-    authorize! :read, @patients
   end
 
   def show; end
