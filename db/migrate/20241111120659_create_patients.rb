@@ -6,6 +6,7 @@ class CreatePatients < ActiveRecord::Migration[7.1]
       t.string :avatar_url
       t.string :first_name
       t.string :last_name
+      t.string :phone
       t.text :bio
       t.date :birdth_day
       t.string :sex
