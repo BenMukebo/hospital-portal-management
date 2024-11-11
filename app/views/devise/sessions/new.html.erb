@@ -1,0 +1,38 @@
+<!-- app/views/devise/sessions/new.html.erb -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Log in</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+      <!-- Email Field -->
+      <div>
+        <%= f.label :email, class: "block text-gray-700 font-medium" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <!-- Password Field -->
+      <div>
+        <%= f.label :password, class: "block text-gray-700 font-medium" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <!-- Remember Me Checkbox -->
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center">
+          <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
+          <%= f.label :remember_me, class: "ml-2 block text-gray-700" %>
+        </div>
+      <% end %>
+
+      <!-- Submit Button -->
+      <div>
+        <%= f.submit "Log in", class: "w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+      </div>
+    <% end %>
+
+    <!-- Links (e.g., Sign up, Forgot password) -->
+    <div class="mt-6">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

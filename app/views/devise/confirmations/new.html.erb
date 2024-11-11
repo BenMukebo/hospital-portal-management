@@ -1,0 +1,27 @@
+<!-- app/views/devise/confirmations/new.html.erb -->
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Resend Confirmation Instructions</h2>
+
+    <!-- Error Messages -->
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: "space-y-6" }) do |f| %>
+      <!-- Email Field -->
+      <div>
+        <%= f.label :email, class: "block text-gray-700 font-medium" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent" %>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <%= f.submit "Resend confirmation instructions", class: "w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+      </div>
+    <% end %>
+
+    <!-- Links (e.g., Sign up, Log in) -->
+    <div class="mt-6">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

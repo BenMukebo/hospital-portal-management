@@ -10,6 +10,8 @@ gem 'rails', '~> 7.1.5'
 gem 'rubocop', '~> 1.68'
 
 gem 'bullet', group: 'development'
+gem 'devise', '~> 4.9'
+gem 'letter_opener', group: :development
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
