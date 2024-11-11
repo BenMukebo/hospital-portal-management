@@ -9,7 +9,7 @@
     <%= link_to "Edit this patient", edit_patient_path(@patient), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Back to patients", patients_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   
-    <% if current_user.admin? || current_user.receptionist? %>
+    <% if can? :destroy, @patient %>
       <div class="inline-block ml-2">
         <%= button_to "Destroy this patient", @patient, method: :delete, class: "mt-2 rounded-lg py-3 px-5 font-medium bg-red-100 text-red-500", data: { confirm: "Are you sure?" } %>
       </div>

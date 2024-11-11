@@ -6,7 +6,8 @@ class PatientsController < ApplicationController
 
 
   def index
-    @patients = Patient.all
+    @patients = Patient.accessible_by(current_ability)
+    authorize! :read, @patients
   end
 
   def show; end
@@ -18,8 +19,8 @@ class PatientsController < ApplicationController
   def edit; end
 
   def create
+    authorize! :create, @patient
     @patient = Patient.new(patient_params)
-
     respond_to do |format|
       if @patient.save
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
