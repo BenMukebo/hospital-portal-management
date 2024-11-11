@@ -1,0 +1,90 @@
+<%= form_with(model: patient, class: "bg-white shadow-lg rounded-lg p-6") do |form| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation" class="bg-red-100 text-red-700 px-4 py-3 rounded-lg mb-6">
+      <h2 class="font-bold mb-2"><%= pluralize(patient.errors.count, "error") %> prevented this patient from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% patient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Avatar URL -->
+  <div class="mb-5">
+    <%= form.label :avatar_url, "Avatar URL", class: "block text-gray-700 font-semibold mb-2" %>
+    <%= form.text_field :avatar_url, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+  </div>
+
+  <!-- First Name and Last Name -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
+    <div>
+      <%= form.label :first_name, "First Name", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.text_field :first_name, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :last_name, "Last Name", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.text_field :last_name, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+    </div>
+  </div>
+
+  <!-- Bio -->
+  <div class="mb-5">
+    <%= form.label :bio, "Bio", class: "block text-gray-700 font-semibold mb-2" %>
+    <%= form.text_area :bio, rows: 4, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+  </div>
+
+  <!-- Birth Date, Sex, Marital Status -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-5">
+    <div>
+      <%= form.label :birdth_day, "Date of Birth", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.date_field :birdth_day, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :sex, "Sex", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.select :sex, [["Male", "male"], ["Female", "female"], ["Other", "other"]], {}, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+    </div>
+    <div>
+      <%= form.label :marital_status, "Marital Status", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= form.select :marital_status, Patient.marital_statuses.keys.map { |status| [status.humanize, status] }, {}, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+    </div>
+  </div>
+
+  <!-- Address Fields (JSONB) -->
+  <div class="mb-5">
+  <fieldset class="border border-gray-300 p-4 rounded-lg">
+    <legend class="text-gray-700 font-semibold">Address</legend>
+    <%= form.fields_for :address, patient.address || {} do |address_fields| %>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+        <div>
+          <%= address_fields.label :street, "Street", class: "block text-gray-700 font-semibold mb-2" %>
+          <%= address_fields.text_field :street, value: patient.address["street"], class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+        </div>
+        <div>
+          <%= address_fields.label :city, "City", class: "block text-gray-700 font-semibold mb-2" %>
+          <%= address_fields.text_field :city, value: patient.address["city"], class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+        </div>
+        <div>
+          <%= address_fields.label :state, "State", class: "block text-gray-700 font-semibold mb-2" %>
+          <%= address_fields.text_field :state, value: patient.address["state"], class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+        </div>
+        <div>
+          <%= address_fields.label :country, "Country", class: "block text-gray-700 font-semibold mb-2" %>
+          <%= address_fields.text_field :country, value: patient.address["country"], class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+        </div>
+      </div>
+    <% end %>
+  </fieldset>
+</div>
+
+  <!-- Status -->
+  <div class="mb-5">
+    <%= form.label :status, "Status", class: "block text-gray-700 font-semibold mb-2" %>
+    <%= form.select :status, Patient.statuses.keys.map { |status| [status.humanize, status] }, {}, class: "block w-full shadow rounded-md border border-gray-300 px-3 py-2" %>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="text-right">
+    <%= form.submit "Save Patient", class: "px-6 py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition-colors" %>
+  </div>
+<% end %>
