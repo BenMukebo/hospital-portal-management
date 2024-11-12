@@ -2,20 +2,31 @@
 
 > A comprehensive Ruby on Rails application designed to streamline hospital operations, allowing receptionists to manage patient records and enabling doctors to view patient statistics.
 
+![alt text](image.png)
+
+
 ### Live Demo 🔗
 
 - [Video](https://www.loom.com/share/183a3d1bdddc4a51b14b589687b39352?sid=c5f6caa4-2bc2-472c-ac9a-230602fb6aa2)
 
-## Features
+## Features 📖
 #### Receptionist Portal
 - Patient creation: Register new patients and manage patient information.
+- ![alt text](image-4.png)
 - CRUD Operations: Receptionists can create, view, update, and delete patient records.
+![alt text](image-2.png)
+
 ### Doctor Portal
 - View Patient Statistics: Visualize patient registration data over time with charts.
 - Data Insights: Doctors can view age distribution and daily registration statistics of patients.
+
+![alt text](image-1.png)
+
 ### Authentication
 - User login and registration are handled via Devise.
 - User email confirmation are handle with letter_opener
+
+![alt text](image-3.png)
 ### Authorization
 - Role-Based Access Control: Access permissions are managed using the cancancan gem to ensure data security.
 
