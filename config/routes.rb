@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   root 'homes#index'
   get 'homes/index'
   resources :patients, only: %i[index show new create edit update destroy]
+  get 'doctors/patient_statistics', to: 'doctors#patient_statistics'
 end

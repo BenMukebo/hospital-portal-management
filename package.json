@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chart.js": "^4.4.6",
+    "chartkick": "^5.0.1"
+  }
+}
